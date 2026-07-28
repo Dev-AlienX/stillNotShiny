@@ -1,0 +1,12 @@
+<span class="logo" (click)="goToHome()">
+  <img src="../../../../assets/images/pngwing.com.png" alt="Pokeball Icon" />
+</span>
+
+<nav class="nav-item-wrapper">
+  <a href="javascript:void(0)" (click)="goToHome()" class="info button nav-item">Home</a>
+  <a href="javascript:void(0)" (click)="goToPokedex()" class="info button nav-item">Pokedex</a>
+  <a href="javascript:void(0)" (click)="goToRandomPokemon()" class="info button nav-item">Random Pokémon</a>
+  @if (authService.isAuthenticated()) {
+    <a href="javascript:void(0)" (click)="logout()" class="info button nav-item">Logout</a>
+  }
+</nav>

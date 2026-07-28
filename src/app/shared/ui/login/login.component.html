@@ -1,0 +1,21 @@
+<div class="overlay">
+  <div class="popup">
+    <h2>Login Required</h2>
+    <p>Please log in to continue.</p>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="form-field">
+        <label for="username">Username</label>
+        <input id="username" type="text" formControlName="username" placeholder="Try 'ash'">
+      </div>
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" placeholder="Try 'pikachu'">
+      </div>
+      <p *ngIf="loginError" class="error-message">Invalid credentials. Please try again.</p>
+      <div class="actions">
+        <button type="button" class="btn-secondary" (click)="onCancel()">Cancel</button>
+        <button type="submit" class="btn-primary" [disabled]="loginForm.invalid">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

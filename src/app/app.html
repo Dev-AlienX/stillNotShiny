@@ -1,0 +1,16 @@
+<main>
+  <header class="glass-effect">
+    <app-navbar />
+  </header>
+
+  <section id="content">
+    <router-outlet />
+  </section>
+
+  <footer class="glass-effect">
+    <app-footer />
+  </footer>
+  @if (authService.showLoginPopup()) {
+    <app-login></app-login>
+  }
+</main>

@@ -1,0 +1,328 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+/* Base Header for Mobile */
+.header {
+  height: 70vh; /* Changed as per request for mobile */
+  /* REMOVED: padding: 2rem 1.5rem; */
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* ADDED padding here */
+  padding: 2rem 1.5rem 1rem 1.5rem; /* Added top, right, bottom, left padding */
+  margin-bottom: 1rem;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+}
+
+.pokemon-id {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.pokemon-identity {
+  margin-top: 0.5rem;
+  padding-left: 1.5rem; /* Added for mobile */
+  padding-right: 1.5rem; /* Added for mobile */
+}
+
+.pokemon-name {
+  font-size: 2.5rem;
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.types {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-left: 1.5rem; /* Added for mobile */
+  padding-right: 1.5rem; /* Added for mobile */
+}
+
+.type-badge {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(5px);
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.pokemon-image-wrapper {
+  position: absolute;
+  
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: auto; /* This will be determined by top and bottom */
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transform: none; /* No longer needed as left/right are set */
+}
+
+.pokemon-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+}
+
+/* Base Body for Mobile */
+.details-body {
+  flex: 1;
+  background: white;
+  border-radius: 30px 30px 0 0;
+  /* REMOVED: padding: 3rem 1.5rem 1rem; */
+  margin-top: -40px;
+  z-index: 5;
+  overflow-y: auto; /* Allow body to scroll on mobile if content overflows */
+}
+
+.scroll-content {
+  /* Combined padding from .details-body and existing .scroll-content */
+  padding: 3rem 1.5rem 1rem 1.5rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.label {
+  width: 100px;
+  color: #999;
+  font-weight: 600;
+}
+
+.value {
+  color: #333;
+  font-weight: 500;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+/* Attacks */
+.attacks-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.attack-badge {
+  background-color: #f0f0f0;
+  color: #555;
+  padding: 0.4rem 0.8rem;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+  /* Effectiveness */
+.effectiveness-group {
+  margin-bottom: 1rem;
+}
+
+.types-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+/* Added for responsive stats grid on smaller tablets */
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+  }
+}
+
+/* Stats */
+.stat-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.stat-label {
+  width: 50px;
+  color: #999;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.stat-num {
+  width: 40px;
+  text-align: right;
+  margin-right: 1rem;
+  font-weight: 500;
+}
+
+.progress-bg {
+  flex: 1;
+  height: 6px;
+  background: #f0f0f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s ease-out;
+}
+
+/* Evolution */
+.evolution-chain {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.evo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.evo-item:hover {
+  transform: scale(1.1);
+}
+
+.evo-item img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 0.5rem;
+}
+
+.evo-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  color: #ddd;
+  margin-left: 10px;
+  position: absolute;
+  right: -25px;
+  top: 30%;
+}
+
+.evo-item:last-child .arrow {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Desktop Layout - Corrected for proper scrolling */
+@media (min-width: 1024px) {
+  .details-container {
+    flex-direction: row;
+    align-items: stretch; /* Make children stretch to full height */
+  }
+
+  .header {
+    width: 40%;
+    height: 100%; /* Let flexbox determine height, fill parent */
+    position: static; /* Remove sticky positioning to contain it within the flex parent */
+  }
+
+  .pokemon-image-wrapper {
+           position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+  }
+
+  .pokemon-image {
+    height: auto;
+    width: auto;
+    max-width: calc(100% - 40px);
+    max-height:  calc(100% - 40px);
+  }
+
+  .details-body {
+    width: 60%;
+    height: 100%; /* Take full height of the container */
+    display: flex; /* Make it a flex container */
+    flex-direction: column; /* Stack children vertically */
+    margin-top: 0;
+    border-radius: 0;
+    /* REMOVED: padding: 4rem 3rem; */
+  }
+
+  .details-body .scroll-content {
+    flex-grow: 1; /* Make scroll-content fill available space */
+    overflow-y: auto; /* Enable vertical scrolling for the content */
+    /* ADDED desktop specific padding here */
+    padding: 4rem 3rem;
+  }
+}

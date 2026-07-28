@@ -1,0 +1,55 @@
+<!-- <input type="text" id="search" placeholder="Pikachu..." class="search" />
+<select class="generation-filter" id="filter">
+  @for (filter of filterBy(); track filter) {
+    <option [value]="filter">{{ filter | titlecase }}</option>
+  }
+</select> -->
+<div class="search-box-container">
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="query"
+      [placeholder]="placeholderText()"
+      (input)="onSearch()"
+    />
+    <select [(ngModel)]="searchMode" class="mode-select">
+      <option value="pokemon">Pokémon</option>
+      <option value="type">Types</option>
+      <option value="generation">Generation</option>
+      <option value="region">Region</option>
+    </select>
+    <button (click)="onSearch()" class="search-btn">Search</button>
+  </div>
+  <div class="capsule-container">
+    @switch (searchMode()) {
+      @case ('type') {
+        @for (t of types(); track t) {
+          <button class="capsule type-pill" (click)="selectCapsule(t)">{{ t | titlecase }}</button>
+        }
+      }
+      @case ('generation') {
+        @for (g of generations(); track g) {
+          <button class="capsule gen-pill" (click)="selectCapsule(g)">{{ g | uppercase }}</button>
+        }
+      }
+      @case ('region') {
+        @for (r of regions(); track r) {
+          <button class="capsule region-pill" (click)="selectCapsule(r)">
+            {{ r | titlecase }}
+          </button>
+        }
+      }
+    }
+    <!-- @if (showSkeleton()) {
+      @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track i) {
+        <div class="capsule skeleton"></div>
+      }
+    } @else {
+      @for (item of metadataResource.value(); track item) {
+        <button class="capsule" (click)="selectCapsule(item)">
+          {{ item | titlecase }}
+        </button>
+      }
+    } -->
+  </div>
+</div>
