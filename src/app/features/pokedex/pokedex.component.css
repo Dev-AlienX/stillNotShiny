@@ -1,0 +1,21 @@
+.pokedexContainer {
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.pokedexContainer .genSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.pokedexContainer .genSection .genPokemonList {
+  display: grid;
+  grid-template-columns: repeat(6, 256px);
+  grid-auto-rows: 304px; 
+  gap: 20px;
+}

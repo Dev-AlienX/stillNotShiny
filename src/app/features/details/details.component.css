@@ -14,8 +14,7 @@
 }
 
 /* Base Header for Mobile */
-.header {
-  height: 70vh; /* Changed as per request for mobile */
+.header { 
   /* REMOVED: padding: 2rem 1.5rem; */
   position: relative;
   color: white;
@@ -80,11 +79,10 @@
 
 .pokemon-image-wrapper {
   position: absolute;
-  
   bottom: 0;
   left: 0;
   right: 0;
-  width: 100%;
+  width: auto; /* This will be determined by left and right */
   height: auto; /* This will be determined by top and bottom */
   z-index: 10;
   display: flex;
@@ -100,6 +98,12 @@
   object-fit: contain;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
 }
+
+.header, .details-body{
+  height: calc(100% - 60px) !important; /* Subtracting header (60px) height */
+  padding-top: 60px; /* Remove top padding for mobile */
+}
+
 
 /* Base Body for Mobile */
 .details-body {
@@ -120,6 +124,9 @@
 .section {
   margin-bottom: 2rem;
   animation: fadeIn 0.5s ease-out;
+}
+.noMargin{
+  margin-bottom: 0 !important;
 }
 
 .info-row {
@@ -299,7 +306,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px;
   }
 
   .pokemon-image {
@@ -311,7 +317,6 @@
 
   .details-body {
     width: 60%;
-    height: 100%; /* Take full height of the container */
     display: flex; /* Make it a flex container */
     flex-direction: column; /* Stack children vertically */
     margin-top: 0;

@@ -1,14 +1,13 @@
 import { Component, signal, inject, HostListener, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
-import { FooterComponent } from './shared/ui/footer/footer.component';
 import { NavbarComponent } from './shared/ui/navbar/navbar.component';
 import { LoginComponent } from './shared/ui/login/login.component';
 import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, FooterComponent, NavbarComponent, LoginComponent],
+  imports: [CommonModule, RouterOutlet, NavbarComponent, LoginComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -14,19 +14,15 @@ main {
 #content {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(2px);
-  height: calc(100% - 100px); /* Subtracting header (60px) and footer (40px) heights */
-  overflow-y: scroll;
+  height: 100%; /* Subtracting header (60px) height */
+  overflow-y: auto;
   overflow-x: hidden;
-}
-
-footer {
-  height: 40px;
-  width: 100%;
-  z-index: 1;
 }
 
 header {
   height: 60px;
   width: 100%;
-  z-index: 1;
+  z-index: 10;
+  position: fixed;
+
 }

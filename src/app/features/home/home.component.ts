@@ -25,10 +25,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchRandomPokemon();
-    this.subscription = this.channelService.onWithAck<string, string>('navbar-to-footer').subscribe(({ payload, ack }) => {
-      console.log('recived in home ', payload);
-      ack('HomeComponent got it!');
-    });
+    this.subscription = this.channelService
+      .onWithAck<string, string>('navbar-to-footer')
+      .subscribe(({ payload, ack }) => {
+        console.log('recived in home ', payload);
+        ack('HomeComponent got it!');
+      });
   }
 
   ngOnDestroy(): void {
@@ -53,7 +55,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.pokemon.set(pokemonDetails);
   }
 
-  async onFilterChanged({ filterType, filterValue, }: { filterType: FilterMode;  filterValue: string; }) {
+  async onFilterChanged({
+    filterType,
+    filterValue,
+  }: {
+    filterType: FilterMode;
+    filterValue: string;
+  }) {
     if (filterType === 'pokemon') {
       // The 'pokemon' mode is handled by router navigation in FiltersComponent
       return;
@@ -94,4 +102,3 @@ export class HomeComponent implements OnInit, OnDestroy {
     return Array.from(ids);
   }
 }
-

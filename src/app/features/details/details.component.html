@@ -97,7 +97,7 @@
       </div>
 
       <!-- Evolution Section -->
-      <div class="section">
+      <div class="section noMargin">
         <h3 class="section-title" [style.color]="data.pokemon.types[0].type.name | typeColor">Evolution</h3>
         <div class="evolution-chain">
           <div *ngFor="let evo of data.evolutionChain; let last = last" class="evo-item" (click)="onEvolutionClick(evo.name)">

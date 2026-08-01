@@ -1,13 +1,25 @@
-<h1>Pokedex</h1>
-
-<!-- @switch (pokemonListResource.state()) { @case ('loading') {
-  <app-loader [count]="12" />
-} @case ('loaded') { @if (pokemonListResource.value(); as pokemonList) { -->
-<ul>
-  @for (pokemon of pokemonListResource.value(); track pokemon.name) {
-  <li>{{ pokemon.name | titlecase }}</li>
+<article class="pokedexContainer">
+  @for (regionData of regionsWithPokemon(); track regionData.regionName) {
+    <section class="genSection">
+      <h2>{{ regionData.regionName | uppercase }}</h2>
+      <ul class="genPokemonList">
+        @defer (on viewport) {
+          @for (pokemon of regionData.pokemon; track pokemon.name) {
+            <li class="pokemon-card">
+              @defer (on viewport) {
+                @let pokeSignal = getPokemonSignal(pokemon, regionData.regionName);
+                @if (pokeSignal(); as pkmn) {
+                  <app-poke-card [name]="pkmn.name" [id]="pkmn.id" />
+                }
+              } @placeholder {
+                <div>loader</div>
+              }
+            </li>
+          }
+        } @placeholder {
+          <div>loader</div>
+        }
+      </ul>
+    </section>
   }
-</ul>
-<!-- } @else {
-<p>No pokemon found.</p>
-} } } -->
+</article>
