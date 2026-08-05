@@ -1,9 +1,10 @@
 .pokedexContainer {
-  padding-top: 60px;
+  padding-top: 80px !important;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  align-items: flex-start;
+  align-items: center;
+  padding: 20px;
 }
 
 .pokedexContainer .genSection {
@@ -16,6 +17,6 @@
 .pokedexContainer .genSection .genPokemonList {
   display: grid;
   grid-template-columns: repeat(6, 256px);
-  grid-auto-rows: 304px; 
+  grid-auto-rows: 304px;
   gap: 20px;
 }

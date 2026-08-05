@@ -1,19 +1,21 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, OnInit, inject } from '@angular/core';
 import { HttpClient, HttpContext } from '@angular/common/http';
-import { map, Observable, switchMap, catchError, of } from 'rxjs';
+import { map, Observable, switchMap, catchError, of, tap, forkJoin } from 'rxjs';
 import {
   Pokemon,
   PokemonListResponse,
   EvolutionChain,
 } from '../../shared/models/pokemon.interfaces';
 import { BYPASS_LOGGING } from '../interceptors/interceptor.context';
-import {hisuiPokemon, specialForms}  from '../services/pokemon'
+import { hisuiPokemon, specialForms } from '../services/pokemon';
+import { DataModelManager } from './data-model-manager';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PokeService {
+export class PokeService implements OnInit {
   private http = inject(HttpClient);
+  private DMS = inject(DataModelManager);
   private readonly baseUrl = 'https://pokeapi.co/api/v2';
 
   // For the Pokedex list
@@ -118,15 +120,13 @@ export class PokeService {
 
   // For specific details (Home suggestions & Details page)
   getPokemonByNameOrId(nameOrId: string | number) {
-    
-
     const context = new HttpContext().set(BYPASS_LOGGING, true);
 
     // if( typeof(nameOrId) == 'string'){
     //   const name:string = nameOrId.toLowerCase();
     //   const specialnames = specialForms[name as keyof typeof specialForms];
     //   specialnames?.forEach((name) => {
-       
+
     //   });
     // }
 
@@ -150,4 +150,48 @@ export class PokeService {
       }),
     );
   }
+
+  getAllRegions(): Observable<any> {
+    return this.http.get<{ results: any[] }[]>(`${this.baseUrl}/region`).pipe(
+      tap((regions: any) => {
+        console.log('Fetched regions:', regions);
+      }),
+      map((regions: any) => {
+        return regions.results;
+      }),
+    );
+  }
+
+  setAllRegions(): void {
+    this.getAllRegions().subscribe((regions) => {
+      this.DMS.registerDataModel('regions', regions, true, true);
+      console.log(this.DMS.getById('regions'));
+      this.getAllGenerations();
+    });
+  }
+
+  getAllGenerations(): void {
+    let regions = this.DMS.getById('regions');
+    const requests: Observable<any>[] = regions.map((item: { name: string; url: string; regionDetails?:any }) => {
+      return this.http.get(item.url).pipe(
+        map((response) => {
+          // 2. Set the response into the new property and return the mutated item
+          item.regionDetails = response;
+          return item;
+        }),
+      );
+    });
+
+    forkJoin(requests).subscribe({
+      next: (updatedArray: any) => {
+        regions = updatedArray;
+        console.log('Updated Array:', regions);
+      },
+      error: (err: any) => {
+        console.error('An error occurred during API calls:', err);
+      },
+    });
+  }
+
+  ngOnInit(): void {}
 }

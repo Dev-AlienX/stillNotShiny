@@ -4,6 +4,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/ui/navbar/navbar.component';
 import { LoginComponent } from './shared/ui/login/login.component';
 import { AuthService } from './core/services/auth.service';
+import { PokeService} from "./core/services/poke.service"
 
 @Component({
   selector: 'app-root',
@@ -16,11 +17,13 @@ export class App implements OnInit, OnDestroy {
   authService = inject(AuthService);
   private platformId = inject(PLATFORM_ID);
   private router = inject(Router);
+  private pokeService = inject(PokeService);
 
   private interactionListener!: () => void;
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
+    this.pokeService.setAllRegions();
       this.interactionListener = this.handleInteraction.bind(this);
       document.addEventListener('click', this.interactionListener);
       document.addEventListener('keydown', this.interactionListener);
