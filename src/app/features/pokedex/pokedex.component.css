@@ -12,6 +12,14 @@
   flex-direction: column;
   gap: 20px;
   align-items: flex-start;
+
+  h2 {
+    width: 100%;
+    padding: 10px 0;
+    background: rgba(223, 223, 223, 0.856);
+    border-radius: 10px;
+    text-align: center;
+  }
 }
 
 .pokedexContainer .genSection .genPokemonList {
@@ -19,4 +27,31 @@
   grid-template-columns: repeat(6, 256px);
   grid-auto-rows: 304px;
   gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .pokedexContainer {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 20px;
+    flex-wrap: wrap;
+    flex-direction: unset;
+  }
+
+  .pokedexContainer .genSection {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    flex: 1 1 100%;
+  }
+  .pokedexContainer .genSection .genPokemonList {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 304px;
+    gap: 20px;
+    align-items: center;
+    align-content: center;
+  }
 }
